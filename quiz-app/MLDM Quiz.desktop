@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=MLDM Quiz App
+Comment=Launch the MLDM Exam Quiz web app
+Path=/home/kaveh/Projects/ML Questions/quiz-app
+Exec=/home/kaveh/Projects/ML Questions/quiz-app/run.sh
+Terminal=true
+Icon=utilities-terminal
+Categories=Education;

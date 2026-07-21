@@ -1,0 +1,955 @@
+[
+  {
+    "id": 1,
+    "category": "Metric Distance Functions",
+    "question": "Which of the following is NOT a property of a metric distance function?",
+    "options": [
+      { "id": "a", "text": "Symmetry" },
+      { "id": "b", "text": "Triangle inequality" },
+      { "id": "c", "text": "Non-negativity" },
+      { "id": "d", "text": "Boundedness" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "A metric distance function must satisfy exactly four properties: non-negativity ($d(x,y) \\ge 0$ for all $x,y$), identity of indiscernibles ($d(x,y)=0 \\iff x=y$), symmetry ($d(x,y)=d(y,x)$), and the triangle inequality ($d(x,z) \\le d(x,y)+d(y,z)$). Boundedness — requiring the distance to never exceed some fixed maximum — is not part of this definition; a metric is free to take arbitrarily large values, so it is the property that does NOT belong.\n\nSymmetry (a), the triangle inequality (b), and non-negativity (c) are each explicitly required properties of any metric, so they are incorrect choices for 'NOT a property'."
+  },
+  {
+    "id": 2,
+    "category": "Similarity Measures",
+    "question": "Given the two binary vectors below, which is their similarity according to the Simple Matching Coefficient (SMC)?\n\nVector 1: 1000101101\nVector 2: 1011101010",
+    "options": [
+      { "id": "a", "text": "0.375" },
+      { "id": "b", "text": "0.6" },
+      { "id": "c", "text": "0.5" },
+      { "id": "d", "text": "0.3" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "The Simple Matching Coefficient counts both matching 1s and matching 0s: $SMC = \\frac{a+d}{a+b+c+d}$, where a = both 1, d = both 0, b and c = mismatches. Comparing position by position, the vectors agree on 5 of the 10 positions (3 double-1 matches and 2 double-0 matches) and disagree on the other 5, giving $SMC = \\frac{5}{10} = 0.5$.\n\n0.375 (a) is actually the Jaccard Coefficient for this same pair of vectors, which ignores double-0 matches — a common point of confusion. 0.6 (b) and 0.3 (d) do not correspond to any correct count of matches for these vectors."
+  },
+  {
+    "id": 3,
+    "category": "Similarity Measures",
+    "question": "Given the two binary vectors below, which is their similarity according to the Jaccard Coefficient?\n\nVector 1: 1000101101\nVector 2: 1011101010",
+    "options": [
+      { "id": "a", "text": "0.1" },
+      { "id": "b", "text": "0.375" },
+      { "id": "c", "text": "0.5" },
+      { "id": "d", "text": "0.2" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "The Jaccard Coefficient only considers positions where at least one vector has a 1: $JC = \\frac{a}{a+b+c}$, where a = both 1, and b, c = mismatches involving a 1. There are 3 positions where both vectors have a 1, and 5 positions where exactly one of them has a 1, giving $JC = \\frac{3}{3+5} = \\frac{3}{8} = 0.375$.\n\n0.5 (c) is the Simple Matching Coefficient for the same vectors, which incorrectly also counts double-0 matches. 0.1 (a) and 0.2 (d) do not match the actual counts of 1s and mismatches in these vectors."
+  },
+  {
+    "id": 4,
+    "category": "Clustering Methods",
+    "question": "What is the single linkage?",
+    "options": [
+      { "id": "a", "text": "A method to compute the distance between two clusters using the maximum distance between any two of their points" },
+      { "id": "b", "text": "A method to compute the distance between two clusters using the average distance between all pairs of their points" },
+      { "id": "c", "text": "A method to compute the distance between two clusters using the smallest distance between any two of their points; it can be used in hierarchical clustering" },
+      { "id": "d", "text": "A method to compute the distance between two clusters using the distance between their centroids" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Single linkage is a method used in hierarchical agglomerative clustering to measure the distance between two clusters by taking the minimum distance between any pair of points, one from each cluster: $d(A,B) = \\min_{a \\in A, b \\in B} d(a,b)$. Because it merges clusters based on their closest points, single linkage can follow elongated, chain-like structures in the data.\n\nOption a describes complete linkage (maximum distance), option b describes average linkage, and option d describes centroid linkage — all are valid alternative linkage criteria, but none of them is what 'single linkage' refers to."
+  },
+  {
+    "id": 5,
+    "category": "Evaluation Metrics",
+    "question": "Given the definitions below:\n- $TP$ = True Positives\n- $TN$ = True Negatives\n- $FP$ = False Positives\n- $FN$ = False Negatives\n\nWhich of the formulas below computes the recall (or hit rate or sensitivity) of a binary classifier?",
+    "options": [
+      { "id": "a", "text": "$(TP+TN)/(TP+FP+TN+FN)$" },
+      { "id": "b", "text": "$TN/(TN+FP)$" },
+      { "id": "c", "text": "$TP/(TP+FN)$" },
+      { "id": "d", "text": "$TP/(TP+FP)$" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Recall (also called sensitivity or hit rate) measures the fraction of actual positive cases that the classifier correctly identifies: $Recall = \\frac{TP}{TP+FN}$. It focuses only on the actual positive population (TP + FN), so low recall means many positives are missed (high FN). This is crucial in domains like disease or fraud detection, where missing a positive case is costly.\n\nOption a is accuracy (uses all four counts), option b is specificity (the negative-class analogue of recall), and option d is precision (which normalizes by predicted positives, TP+FP, rather than actual positives, TP+FN)."
+  },
+  {
+    "id": 6,
+    "category": "Evaluation Metrics",
+    "question": "Given the definitions below:\n- $TP$ = True Positives\n- $TN$ = True Negatives\n- $FP$ = False Positives\n- $FN$ = False Negatives\n\nWhich of the formulas below computes the accuracy of a binary classifier?",
+    "options": [
+      { "id": "a", "text": "$TP/(TP+FP)$" },
+      { "id": "b", "text": "$(TP+TN)/(TP+FP+TN+FN)$" },
+      { "id": "c", "text": "$TN/(TN+FP)$" },
+      { "id": "d", "text": "$TP/(TP+FN)$" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Accuracy measures the proportion of all predictions (both positive and negative) that were correct: $Accuracy = \\frac{TP+TN}{TP+FP+TN+FN}$. It is a general-purpose metric but can be misleading on imbalanced datasets, since a classifier that always predicts the majority class can still score a high accuracy.\n\nOption a is precision, option c is specificity, and option d is recall — each of these normalizes by only a subset of the four counts, unlike accuracy which uses all of TP, TN, FP, and FN in both numerator and denominator."
+  },
+  {
+    "id": 7,
+    "category": "Evaluation Metrics",
+    "question": "Given the definitions below:\n- $TP$ = True Positives\n- $TN$ = True Negatives\n- $FP$ = False Positives\n- $FN$ = False Negatives\n\nWhich of the formulas below computes the precision (or positive predictive value) of a binary classifier?",
+    "options": [
+      { "id": "a", "text": "$TP/(TP+FN)$" },
+      { "id": "b", "text": "$TN/(TN+FP)$" },
+      { "id": "c", "text": "$(TP+TN)/(TP+FP+TN+FN)$" },
+      { "id": "d", "text": "$TP/(TP+FP)$" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "Precision, or positive predictive value, measures how many of the cases predicted as positive are actually positive: $Precision = \\frac{TP}{TP+FP}$. High precision means few false alarms (low FP), which matters in scenarios like spam filtering where a false positive (blocking a legitimate email) is costly.\n\nOption a is recall (normalizes by actual positives, TP+FN, instead of predicted positives), option b is specificity, and option c is accuracy. Precision and recall are often combined into the F1-score to balance both concerns."
+  },
+  {
+    "id": 8,
+    "category": "Evaluation Metrics",
+    "question": "Given the definitions below:\n- $TP$ = True Positives\n- $TN$ = True Negatives\n- $FP$ = False Positives\n- $FN$ = False Negatives\n\nWhich of the formulas below computes the specificity of a binary classifier?",
+    "options": [
+      { "id": "a", "text": "$TP/(TP+FP)$" },
+      { "id": "b", "text": "$TP/(TP+FN)$" },
+      { "id": "c", "text": "$TN/(TN+FP)$" },
+      { "id": "d", "text": "$(TP+TN)/(TP+FP+TN+FN)$" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Specificity, also called the true negative rate, measures how well the classifier identifies actual negative cases: $Specificity = \\frac{TN}{TN+FP}$. It is the negative-class counterpart of recall, and is important when false positives are especially costly, such as diagnostic tests where a false alarm could lead to unnecessary treatment.\n\nOption a is precision, option b is recall, and option d is accuracy — each of these mixes in TP or uses all four counts, unlike specificity which is computed purely from the actual-negative population (TN + FP)."
+  },
+  {
+    "id": 9,
+    "category": "Decision Trees",
+    "question": "Why do we prune a decision tree?",
+    "options": [
+      { "id": "a", "text": "To increase the depth of the tree so it fits the training data more closely" },
+      { "id": "b", "text": "To eliminate parts of the tree where the decisions could be influenced by random effects" },
+      { "id": "c", "text": "To convert the decision tree into an ensemble of trees" },
+      { "id": "d", "text": "To speed up the computation of the Gini Index at each node" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Pruning removes branches of a decision tree that were learned from noise or from small, statistically unreliable subsets of the training data rather than from genuine patterns. By eliminating these parts, pruning reduces the tree's complexity and its risk of overfitting, improving its ability to generalize to unseen data.\n\nOption a describes the opposite of pruning (growing the tree further, which increases overfitting risk). Option c describes ensembling (e.g. random forests), a different technique. Option d is not the purpose of pruning — pruning is about generalization, not about the speed of computing a splitting criterion."
+  },
+  {
+    "id": 10,
+    "category": "Decision Trees",
+    "question": "A Decision Tree is...",
+    "options": [
+      { "id": "a", "text": "A graph of probabilistic dependencies between attributes, used for inference" },
+      { "id": "b", "text": "A tree-structured plan of tests on single attributes to forecast the target" },
+      { "id": "c", "text": "A linear combination of attributes weighted to minimize squared error" },
+      { "id": "d", "text": "A density-based grouping of similar objects" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "A decision tree is a predictive model that repeatedly tests single attributes at each internal node, splitting the data into subsets, until it reaches leaf nodes that assign a predicted class (or value). This tree-structured sequence of tests forms an interpretable plan for forecasting the target attribute.\n\nOption a describes a Bayesian network, a different probabilistic model. Option c describes (linear) regression, and option d describes a density-based clustering method such as DBSCAN — none of these are decision trees."
+  },
+  {
+    "id": 11,
+    "category": "Neural Networks",
+    "question": "When training a neural network, what is the learning rate?",
+    "options": [
+      { "id": "a", "text": "A multiplying factor of the correction to be applied to the connection weights" },
+      { "id": "b", "text": "The slope of the activation function in a specific node" },
+      { "id": "c", "text": "The ratio between the size of the hidden layer and the input layer of the network" },
+      { "id": "d", "text": "The speed of convergence to a stable solution during the learning process" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "The learning rate ($\\eta$) is a hyperparameter that scales how much the connection weights are adjusted at each step of training, typically during gradient-descent-based backpropagation: $w_{new} = w_{old} - \\eta \\cdot \\frac{\\partial L}{\\partial w}$. A small learning rate gives stable but slow convergence, while a large one speeds up training but risks overshooting the optimum or diverging.\n\nOption b describes a property of the activation function itself, not the learning rate. Option c describes a network architecture ratio, unrelated to learning rate. Option d describes an outcome that may be influenced by the learning rate, but it is not itself the definition of the learning rate."
+  },
+  {
+    "id": 12,
+    "category": "Clustering Methods",
+    "question": "Which of the following is a strength of the clustering algorithm DBSCAN? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "Ability to find clusters with concavities" },
+      { "id": "b", "text": "Ability to separate outliers from regular data" },
+      { "id": "c", "text": "Efficiency even on very large datasets" },
+      { "id": "d", "text": "Requires specifying the number of clusters k in advance" }
+    ],
+    "correct": ["a", "b"],
+    "multiple": true,
+    "explanation": "DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups points that are densely connected, using two parameters, $\\epsilon$ (neighborhood radius) and minPts (minimum points to form a dense region). Because it follows density rather than a fixed shape, it can discover clusters with arbitrary shapes, including concavities, and it explicitly labels sparse points as noise, separating outliers from regular data.\n\nEfficiency on large datasets (c) is actually a weakness of DBSCAN relative to K-Means, since it must compute neighborhood relationships between points, which is more expensive at scale. Requiring the number of clusters k in advance (d) is a characteristic of K-Means, not DBSCAN — DBSCAN determines the number of clusters automatically from the density structure of the data."
+  },
+  {
+    "id": 13,
+    "category": "Clustering Methods",
+    "question": "Which of the following is not a strength point of DBSCAN with respect to K-means?",
+    "options": [
+      { "id": "a", "text": "The effectiveness, even in presence of noise" },
+      { "id": "b", "text": "The efficiency even in large datasets" },
+      { "id": "c", "text": "The robustness with respect to outliers" },
+      { "id": "d", "text": "The effectiveness even if there are clusters with non-convex shape" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "DBSCAN's genuine strengths compared to K-Means are its effectiveness in the presence of noise, its robustness to outliers, and its ability to find non-convex (e.g. concave or elongated) clusters, since it does not assume spherical clusters around a centroid. Efficiency on large datasets, however, is actually a weakness of DBSCAN: it must evaluate neighborhood relationships for each point (which can be costly without spatial indexing), whereas K-Means scales roughly linearly with the number of points and is generally faster and easier to run on large datasets.\n\nOptions a, c, and d are all real advantages of DBSCAN over K-Means, so they are incorrect answers to a question asking for what is NOT a strength."
+  },
+  {
+    "id": 14,
+    "category": "Clustering Methods",
+    "question": "Which of the following characteristics of data can reduce the effectiveness of K-Means?",
+    "options": [
+      { "id": "a", "text": "A large number of data points" },
+      { "id": "b", "text": "Balanced cluster sizes" },
+      { "id": "c", "text": "Presence of outliers" },
+      { "id": "d", "text": "Use of a small number of clusters k" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "K-Means computes each cluster's centroid as the mean of the points assigned to it, and the mean is highly sensitive to extreme values. Outliers can therefore pull a centroid far away from the true center of a cluster, distorting the resulting partition and degrading clustering quality.\n\nA large number of data points (a) is not itself a problem for K-Means — the algorithm scales roughly linearly with the number of points, which is one of its strengths. Balanced cluster sizes (b) tend to help K-Means rather than hurt it, since the algorithm implicitly favors similarly-sized, spherical clusters. A small number of clusters k (d) is simply a parameter choice, not a data characteristic that inherently reduces effectiveness."
+  },
+  {
+    "id": 15,
+    "category": "Clustering Methods",
+    "question": "After fitting DBSCAN with the default parameter values, the results are: 0 clusters, 100% of noise points. Which of the following would be a reasonable next trial? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "Reduce the minimum number of points (minPts) required in a neighborhood" },
+      { "id": "b", "text": "Increase the radius (epsilon) of the neighborhood" },
+      { "id": "c", "text": "Increase minPts" },
+      { "id": "d", "text": "Decrease epsilon" }
+    ],
+    "correct": ["a", "b"],
+    "multiple": true,
+    "explanation": "If DBSCAN classifies every point as noise, its density thresholds are too strict for the data: either too few points fall within the neighborhood radius, or too many points are required to form a dense (core) region. Reducing minPts makes it easier for a point to qualify as a core point, and increasing epsilon enlarges each point's neighborhood so more neighbors are included — both changes make it easier for clusters to form.\n\nIncreasing minPts (c) or decreasing epsilon (d) would make the density criteria even stricter, producing more noise rather than less, which is the opposite of what is needed here."
+  },
+  {
+    "id": 16,
+    "category": "Association Rules",
+    "question": "Which of the following statements regarding the discovery of association rules is true? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "The confidence of a rule can be computed starting from the supports of itemsets" },
+      { "id": "b", "text": "The support of an itemset is anti-monotonic with respect to the composition of the itemset" },
+      { "id": "c", "text": "The confidence of an itemset is anti-monotonic with respect to its composition" },
+      { "id": "d", "text": "The support of a rule increases as more items are added to the itemset" }
+    ],
+    "correct": ["a", "b"],
+    "multiple": true,
+    "explanation": "The confidence of a rule $X \\Rightarrow Y$ is defined purely in terms of itemset supports: $Confidence(X \\Rightarrow Y) = \\frac{Support(X \\cup Y)}{Support(X)}$, so statement a is true. Support is also anti-monotonic: adding more items to an itemset can only keep its support the same or reduce it, since a transaction must contain all items of the (larger) itemset to count, so statement b is true as well — this is exactly the property exploited by the Apriori algorithm to prune the search space.\n\nAnti-monotonicity is a property of support, not confidence (c is false — confidence can increase or decrease unpredictably as an itemset grows). Support decreases (or stays equal), never increases, as items are added to an itemset (d is false, the opposite of the anti-monotone property)."
+  },
+  {
+    "id": 17,
+    "category": "Association Rules",
+    "question": "Consider the transactional dataset below:\n- Transaction 1: A, B, C\n- Transaction 2: A, B, D\n- Transaction 3: B, D, E\n- Transaction 4: C, D\n- Transaction 5: A, C, D, E\n\nWhich is the confidence of the rule $A, C \\Rightarrow B$?",
+    "options": [
+      { "id": "a", "text": "100%" },
+      { "id": "b", "text": "50%" },
+      { "id": "c", "text": "20%" },
+      { "id": "d", "text": "40%" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Confidence is computed as $Confidence(A,C \\Rightarrow B) = \\frac{Support(A,B,C)}{Support(A,C)}$. The itemset {A, C} appears in transactions 1 and 5, giving $Support(A,C) = 2/5 = 0.4$. The itemset {A, B, C} appears only in transaction 1, giving $Support(A,B,C) = 1/5 = 0.2$. Therefore $Confidence = 0.2/0.4 = 0.5 = 50\\%$.\n\n20% (c) is actually the support of the rule, not its confidence — a common point of confusion. 100% (a) and 40% (d) do not correspond to the correct ratio of these two supports."
+  },
+  {
+    "id": 18,
+    "category": "Association Rules",
+    "question": "Consider the transactional dataset below:\n- Transaction 1: A, B, C\n- Transaction 2: A, B, D\n- Transaction 3: B, D, E\n- Transaction 4: C, D\n- Transaction 5: A, C, D, E\n\nWhich is the support of the rule $A, C \\Rightarrow B$?",
+    "options": [
+      { "id": "a", "text": "100%" },
+      { "id": "b", "text": "40%" },
+      { "id": "c", "text": "20%" },
+      { "id": "d", "text": "50%" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "The support of a rule $X \\Rightarrow Y$ equals the support of the combined itemset $X \\cup Y$: $Support(A,C \\Rightarrow B) = Support(A,B,C)$. Only transaction 1 (A, B, C) contains all three items A, B, and C, so $Support = 1/5 = 20\\%$.\n\n50% (d) is the confidence of this same rule, not its support — a frequent point of confusion between the two measures. 100% (a) and 40% (b) do not match the actual count of transactions containing {A, B, C}."
+  },
+  {
+    "id": 19,
+    "category": "Association Rules",
+    "question": "Consider the transactional dataset below:\n- Transaction 1: A, B, C\n- Transaction 2: A, B, D\n- Transaction 3: B, D, E\n- Transaction 4: C, D\n- Transaction 5: A, C, D, E\n\nWhich is the confidence of the rule $B \\Rightarrow E$?",
+    "options": [
+      { "id": "a", "text": "20%" },
+      { "id": "b", "text": "60%" },
+      { "id": "c", "text": "33%" },
+      { "id": "d", "text": "50%" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "$Confidence(B \\Rightarrow E) = \\frac{Support(B,E)}{Support(B)}$. The itemset {B, E} appears only in transaction 3, so $Support(B,E) = 1/5 = 0.2$. B itself appears in transactions 1, 2, and 3, so $Support(B) = 3/5 = 0.6$. Therefore $Confidence = 0.2/0.6 \\approx 0.33 = 33\\%$.\n\n20% (a) is the support of {B, E}, not the confidence of the rule. 60% (b) is the support of B alone. 50% (d) does not correspond to the correct ratio of these two supports."
+  },
+  {
+    "id": 20,
+    "category": "Regression",
+    "question": "When is polynomial regression appropriate?",
+    "options": [
+      { "id": "a", "text": "When there is more than one predicting attribute" },
+      { "id": "b", "text": "When the relationship between the predicting variable and the target cannot be approximated as linear" },
+      { "id": "c", "text": "When it is necessary to project the data into a higher dimensional space" },
+      { "id": "d", "text": "When the target values are not linearly separable" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Linear regression fits a straight line, $y = w_0 + w_1x$, which only captures linear relationships. When the underlying relationship between predictor and target is curved, polynomial regression extends the model by adding polynomial terms, $y = w_0 + w_1x + w_2x^2 + \\dots + w_dx^d$, allowing it to fit non-linear patterns while still being a linear model in its coefficients.\n\nOption a describes multiple regression (more than one predictor), which is a different extension unrelated to the shape of the relationship. Option c describes kernel methods or feature mapping (e.g. in SVMs), not the motivation for polynomial regression itself. Option d refers to separability in classification, a concept that does not apply to regression targets."
+  },
+  {
+    "id": 21,
+    "category": "Data Preprocessing",
+    "question": "Which is the purpose of discretization/discretisation?",
+    "options": [
+      { "id": "a", "text": "Increase the precision of continuous attributes for regression tasks" },
+      { "id": "b", "text": "Convert categorical attributes into continuous numeric ones" },
+      { "id": "c", "text": "Remove missing or noisy values from the dataset" },
+      { "id": "d", "text": "Reduce the number of distinct values of an attribute, in order to put in evidence possible patterns and regularities" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "Discretization converts a continuous (or high-cardinality) attribute into a smaller number of discrete categories or intervals, using techniques such as equal-width binning (dividing the range into N equal-size intervals) or equal-frequency binning (dividing the range so each bin holds roughly the same number of samples). By reducing the number of distinct values, patterns and regularities that would be hidden by fine-grained noise become easier to detect.\n\nOption a describes the opposite effect (discretization actually reduces precision by grouping values). Option b describes the reverse transformation, going from categorical to continuous. Option c describes data cleaning, a separate preprocessing activity unrelated to discretization."
+  },
+  {
+    "id": 22,
+    "category": "CRISP-DM Methodology",
+    "question": "In which part of the CRISP-DM methodology do we perform the test design activity?",
+    "options": [
+      { "id": "a", "text": "Data Understanding" },
+      { "id": "b", "text": "Business Understanding" },
+      { "id": "c", "text": "Modelling" },
+      { "id": "d", "text": "Evaluation" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "CRISP-DM consists of six phases: Business Understanding, Data Understanding, Data Preparation, Modelling, Evaluation, and Deployment. Test design — defining how a model's quality will be assessed (e.g. splitting data into training and test sets, choosing evaluation metrics) — occurs within the Modelling phase, alongside selecting and applying the modeling techniques themselves.\n\nBusiness Understanding (b) and Data Understanding (a) happen earlier and focus on objectives and data exploration, not test design. Evaluation (d) happens after modelling, when the already-designed tests are used to review the model against business objectives, but the test design itself is set up during Modelling."
+  },
+  {
+    "id": 23,
+    "category": "Data Preprocessing",
+    "question": "Which is the main reason for the standardization of numeric attributes?",
+    "options": [
+      { "id": "a", "text": "Map all the numeric attributes to the range [0, 1]" },
+      { "id": "b", "text": "Map all the numeric attributes to a new range such that the mean is zero and the variance is one" },
+      { "id": "c", "text": "Remove outliers from numeric attributes" },
+      { "id": "d", "text": "Convert numeric attributes into categorical bins" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Standardization (Z-score normalization) transforms an attribute using $z = \\frac{x-\\mu}{\\sigma}$, where $\\mu$ is the mean and $\\sigma$ is the standard deviation, so that the resulting values have mean zero and variance one. This is important for algorithms sensitive to the scale of the data, such as K-Means and SVM, ensuring that no attribute dominates purely because of its original scale.\n\nMapping to [0, 1] (a) describes Min-Max scaling, a different rescaling technique that preserves the original distribution's shape but bounds it to a fixed range. Removing outliers (c) is a data cleaning task, not standardization. Converting to categorical bins (d) describes discretization, an unrelated preprocessing step."
+  },
+  {
+    "id": 24,
+    "category": "Decision Trees",
+    "question": "What is the Gini Index?",
+    "options": [
+      { "id": "a", "text": "A distance metric used in hierarchical clustering" },
+      { "id": "b", "text": "A goodness-of-fit index for regression models" },
+      { "id": "c", "text": "An impurity measure of a dataset, alternative to the Information Gain and to the Misclassification Index" },
+      { "id": "d", "text": "A measure of correlation between two categorical attributes" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "The Gini Index quantifies how 'impure' or mixed a set of class labels is: $Gini = 1 - \\sum p_i^2$, where $p_i$ is the proportion of examples belonging to class $i$. A Gini value of 0 means the set is perfectly pure (all one class), while higher values indicate more mixed classes. It serves as an alternative splitting criterion to Information Gain or Misclassification Error when building decision trees.\n\nOption a describes a clustering distance measure, not an impurity index. Option b describes something like $R^2$, used for regression rather than classification impurity. Option d describes a correlation measure, which is a different statistical concept from impurity."
+  },
+  {
+    "id": 25,
+    "category": "Decision Trees",
+    "question": "Which of the following measures can be used as an alternative to the Information Gain when building a decision tree?",
+    "options": [
+      { "id": "a", "text": "$R^2$" },
+      { "id": "b", "text": "Silhouette Index" },
+      { "id": "c", "text": "Gini Index" },
+      { "id": "d", "text": "Support" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "The Gini Index is, like Information Gain, an impurity-based criterion used to decide which attribute to split on at each node of a decision tree. Both measure how much a split improves the 'purity' of the resulting subsets, and either can be used interchangeably as a splitting criterion (e.g. Gini is used by CART, while Information Gain is used by ID3/C4.5).\n\n$R^2$ (a) is a regression goodness-of-fit measure, unrelated to classification tree splitting. The Silhouette Index (b) evaluates the quality of a clustering solution, not a decision tree split. Support (d) is a measure used in association rule mining, not in decision tree construction."
+  },
+  {
+    "id": 26,
+    "category": "Decision Trees",
+    "question": "In a decision tree, the number of objects in a node...",
+    "options": [
+      { "id": "a", "text": "...is smaller than or equal to the number of objects in its ancestor" },
+      { "id": "b", "text": "...is smaller than the number of objects in its ancestor" },
+      { "id": "c", "text": "...is bigger than the number of objects in its ancestor" },
+      { "id": "d", "text": "...is not related to the number of objects in its ancestor" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "As a decision tree splits data from the root down towards the leaves, each split partitions the objects of a node into disjoint, non-empty subsets that are distributed to its children. Consequently, any child node contains a strict subset of the objects present in its parent (ancestor), so the count of objects strictly decreases as you move down the tree.\n\nOption a is too weak, since the relationship is strictly less than (a proper split cannot give a child the exact same count as its parent). Option c states the opposite of what actually happens. Option d is incorrect because there is a clear structural relationship: each node's population is entirely contained within its ancestor's population."
+  },
+  {
+    "id": 27,
+    "category": "Bayesian Classification",
+    "question": "Which of the following is a base hypothesis for a Bayesian classifier?",
+    "options": [
+      { "id": "a", "text": "Attributes must be linearly separable within each class" },
+      { "id": "b", "text": "All attributes must be numeric and continuous" },
+      { "id": "c", "text": "The classes must have equal prior probabilities" },
+      { "id": "d", "text": "The attributes must be statistically independent inside each class" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "The Naive Bayes classifier relies on the 'naive' assumption of conditional independence: given the class, the attributes are assumed to be statistically independent of one another, so $P(X|C) = \\prod_{i=1}^{n} P(x_i|C)$, where $X=(x_1,\\dots,x_n)$ is the feature vector and C the class. This assumption dramatically simplifies estimating the joint probability of all attributes.\n\nLinear separability (a) is an assumption relevant to models like linear SVMs or logistic regression, not Bayesian classifiers. Attributes do not need to be numeric or continuous (b) — Naive Bayes works readily with categorical/discrete attributes too. Equal prior class probabilities (c) is not assumed; the classifier explicitly estimates and uses the (possibly unequal) class priors $P(C)$."
+  },
+  {
+    "id": 28,
+    "category": "Clustering Evaluation",
+    "question": "With reference to the total sum of squared errors (cohesion) and separation of a clustering scheme, which of the statements below is true?",
+    "options": [
+      { "id": "a", "text": "They are unrelated measures that never influence one another" },
+      { "id": "b", "text": "They are strictly correlated: if, changing the clustering scheme, one increases, then the other decreases" },
+      { "id": "c", "text": "Both always increase together as the number of clusters increases" },
+      { "id": "d", "text": "Separation is only meaningful when the total sum of squared errors equals zero" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Cohesion, typically measured by the total Sum of Squared Errors (SSE), captures how tightly grouped the objects within each cluster are — a lower SSE means better cohesion. Separation captures how distinct clusters are from one another. There is a natural trade-off between the two: as a clustering scheme changes to make clusters tighter (lower SSE, better cohesion), the clusters often become more numerous or the boundaries between them can become less distinct, meaning that when one of these measures improves, the other tends to worsen.\n\nOption a is false since the two measures are related through this trade-off. Option c is false because SSE generally decreases (not increases) as the number of clusters grows, since each cluster becomes smaller and tighter. Option d is a nonsensical restriction — separation is a meaningful measure regardless of the SSE value."
+  },
+  {
+    "id": 29,
+    "category": "Clustering Methods",
+    "question": "Which of the statements below about K-means is true? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "Sometimes K-means stops at a configuration which does not give the minimum distortion for the chosen number of clusters" },
+      { "id": "b", "text": "K-means is quite efficient even for large datasets" },
+      { "id": "c", "text": "K-means is very sensitive to the initial assignment of the centers" },
+      { "id": "d", "text": "K-means always converges to the global minimum of the distortion function" },
+      { "id": "e", "text": "K-means automatically determines the optimal number of clusters" }
+    ],
+    "correct": ["a", "b", "c"],
+    "multiple": true,
+    "explanation": "K-Means uses an iterative procedure that only guarantees convergence to a local minimum of the distortion (SSE) function, not necessarily the global minimum, so different runs can end up at different, sometimes suboptimal, configurations — this makes statement a true. Its time complexity is $O(t \\cdot k \\cdot n \\cdot d)$ (iterations × clusters × points × dimensions), which is linear in the number of points n, making it efficient even on large datasets, confirming statement b. Because the algorithm's outcome depends heavily on where the initial centroids are placed, poor initialization can lead to poor final clusters, confirming statement c.\n\nStatement d is false precisely because K-Means can get stuck in local minima rather than always finding the global optimum. Statement e is false because k must be chosen by the user in advance (e.g. via the elbow method or silhouette analysis); K-Means does not determine it automatically."
+  },
+  {
+    "id": 30,
+    "category": "Clustering Methods",
+    "question": "Which of the statements below about DBSCAN is true? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "DBSCAN always stops at a configuration which gives the optimal number of clusters" },
+      { "id": "b", "text": "Increasing the radius of the neighbourhood can decrease the number of noise points" },
+      { "id": "c", "text": "DBSCAN can give good performance when clusters have concavities" },
+      { "id": "d", "text": "Sometimes DBSCAN stops at a configuration which does not include any cluster" }
+    ],
+    "correct": ["b", "c", "d"],
+    "multiple": true,
+    "explanation": "Increasing epsilon enlarges each point's neighborhood, allowing more points to qualify as core or border points, which reduces the number of points labeled as noise — this makes statement b true. Because DBSCAN groups points by density connectivity rather than assuming any particular shape, it naturally handles clusters with concavities or irregular shapes, confirming statement c. If the density parameters (epsilon and minPts) are set too strictly for the data at hand, every point can end up classified as noise, meaning DBSCAN can indeed stop with zero clusters, confirming statement d.\n\nStatement a is false: DBSCAN has no built-in guarantee of optimality — it is highly sensitive to the choice of epsilon and minPts, and a poor choice can produce far too many, too few, or even zero clusters, none of which is guaranteed to be 'optimal'."
+  },
+  {
+    "id": 31,
+    "category": "Association Rules",
+    "question": "What is the meaning of the statement: 'the support is anti-monotone'?",
+    "options": [
+      { "id": "a", "text": "The confidence of a rule never exceeds the support of its antecedent" },
+      { "id": "b", "text": "The support of an itemset is independent of the support of its subsets" },
+      { "id": "c", "text": "The support of an itemset never exceeds the support of any of its subsets" },
+      { "id": "d", "text": "The support of an itemset always equals the sum of the supports of its subsets" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "If itemset $X$ is a subset of itemset $Y$ ($X \\subseteq Y$), then every transaction containing $Y$ must also contain $X$, but not vice versa. Therefore $Support(X) \\ge Support(Y)$: an itemset's support can never be greater than the support of any of its subsets. This anti-monotone property is the theoretical basis of the Apriori algorithm's pruning strategy — if a subset is already infrequent, none of its supersets can be frequent, so they don't need to be evaluated.\n\nOption a mixes up confidence with support and is not the definition of anti-monotonicity. Option b is false — the whole point of anti-monotonicity is that there IS a strict dependency between an itemset's support and its subsets' supports. Option d describes an incorrect additive relationship that does not hold for support."
+  },
+  {
+    "id": 32,
+    "category": "Regression",
+    "question": "What is the coefficient of determination $R^2$?",
+    "options": [
+      { "id": "a", "text": "A distance metric used to compare regression residuals across models" },
+      { "id": "b", "text": "The proportion of misclassified instances produced by a classifier" },
+      { "id": "c", "text": "An index of goodness of fit that measures how well a linear regression model explains the variance of the target" },
+      { "id": "d", "text": "A measure of correlation between two categorical variables" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "$R^2$ expresses the proportion of the variance in the dependent variable that is explained by the independent variable(s) in a regression model: $R^2 = 1 - \\frac{SS_{res}}{SS_{tot}} = 1 - \\frac{\\sum (y_i-\\hat{y}_i)^2}{\\sum (y_i-\\bar{y})^2}$, where $SS_{res}$ is the sum of squared residuals and $SS_{tot}$ is the total sum of squares. Values close to 1 indicate the model explains most of the variability in the target; values close to 0 indicate a poor fit.\n\nOption a misdescribes $R^2$ as a distance metric, which it is not. Option b describes a classification error rate, a concept for categorical targets, not applicable to $R^2$'s regression context. Option d describes correlation between categorical variables, an unrelated statistical concept."
+  },
+  {
+    "id": 33,
+    "category": "Clustering Methods",
+    "question": "What does K-means try to minimize?",
+    "options": [
+      { "id": "a", "text": "The number of clusters k" },
+      { "id": "b", "text": "The distortion, that is the sum of the squared distances of each point with respect to its centroid" },
+      { "id": "c", "text": "The number of iterations until convergence" },
+      { "id": "d", "text": "The Manhattan distance between cluster centroids" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "K-Means seeks to minimize the distortion, formally the Sum of Squared Errors (SSE): $SSE = \\sum_{j=1}^{k}\\sum_{x \\in C_j} ||x-\\mu_j||^2$, where $C_j$ is the $j$-th cluster and $\\mu_j$ its centroid. At each iteration, the algorithm reassigns points to the nearest centroid and recomputes centroids, both steps of which can only decrease (or leave unchanged) this objective.\n\nThe number of clusters k (a) is a fixed input parameter chosen before running the algorithm, not something being optimized during the run. The number of iterations (c) is simply how long the algorithm takes to converge, not its objective function. The distance between centroids (d) is not what K-Means optimizes — it optimizes the distance from points to their own centroid, not the distance between different centroids."
+  },
+  {
+    "id": 34,
+    "category": "CRISP-DM Methodology",
+    "question": "Which of the activities below is part of 'Business Understanding' in the CRISP methodology?",
+    "options": [
+      { "id": "a", "text": "Assessing the situation, e.g. which resources are available (manpower, hardware, software, ...)" },
+      { "id": "b", "text": "Building and evaluating candidate models" },
+      { "id": "c", "text": "Cleaning and formatting the data" },
+      { "id": "d", "text": "Deploying the model into production" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "Business Understanding, the first phase of CRISP-DM, focuses on understanding the project's objectives and requirements from a business point of view. Its key activities include determining business objectives, assessing the situation (an inventory of resources, requirements, assumptions and constraints), determining data mining goals, and producing a project plan — so assessing available resources fits squarely within this phase.\n\nBuilding and evaluating models (b) belongs to the Modelling phase. Cleaning and formatting data (c) belongs to the Data Preparation phase. Deploying the model (d) belongs to the Deployment phase — each is a distinct, later stage of the CRISP-DM lifecycle."
+  },
+  {
+    "id": 35,
+    "category": "Data Preprocessing",
+    "question": "Which of the following statements is true? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "The data which are similar to the majority are never noise" },
+      { "id": "b", "text": "The noise can generate outliers" },
+      { "id": "c", "text": "Outliers can be due to noise" },
+      { "id": "d", "text": "The noise always generates outliers" }
+    ],
+    "correct": ["b", "c"],
+    "multiple": true,
+    "explanation": "Noise is random error or variance in a measured variable, and outliers are data objects that deviate significantly from the rest of the data. These concepts are related but distinct: noise can be one of the causes of an outlier appearing in the data (e.g. a sensor measurement error creating an extreme value), so statement b ('noise can generate outliers') and statement c ('outliers can be due to noise') are both true — they express the same relationship from two angles, describing a possible, not guaranteed, cause-and-effect link.\n\nStatement a is false: even data similar to the majority can, in principle, be affected by small amounts of noise. Statement d is too strong — noise does not ALWAYS generate outliers; most noisy measurements are just slightly off, not extreme enough to be considered outliers."
+  },
+  {
+    "id": 36,
+    "category": "Decision Trees",
+    "question": "In which mining activity can the Information Gain be useful?",
+    "options": [
+      { "id": "a", "text": "Clustering" },
+      { "id": "b", "text": "Classification" },
+      { "id": "c", "text": "Association rule mining" },
+      { "id": "d", "text": "Regression" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Information Gain (IG) is used in classification, specifically to build decision trees (e.g. ID3, C4.5), where it measures how much splitting on a given attribute reduces the entropy (uncertainty) of the class label: $IG(S,A) = H(S) - \\sum_{v \\in Values(A)} \\frac{|S_v|}{|S|} H(S_v)$. The attribute that yields the highest information gain is chosen for a split, since it most effectively separates the classes.\n\nClustering (a) is unsupervised and has no class labels to compute entropy against, so IG does not apply. Association rule mining (c) instead relies on measures like support, confidence, and lift. Regression (d) predicts a continuous target, for which entropy-based measures like IG are not defined."
+  },
+  {
+    "id": 37,
+    "category": "Model Evaluation",
+    "question": "What is cross validation?",
+    "options": [
+      { "id": "a", "text": "A technique to obtain a good estimation of the performance of a classifier using only the training set" },
+      { "id": "b", "text": "A technique to obtain a good estimation of the performance of a classifier when it will be used with data different from the training set" },
+      { "id": "c", "text": "A technique to improve the speed of a classifier" },
+      { "id": "d", "text": "A technique to improve the quality of a classifier by adding more training data" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Cross-validation (e.g. k-fold cross-validation) partitions the data into subsets, repeatedly training the model on some subsets and validating it on the held-out remaining subset. This estimates how well the model will generalize to new, unseen data, rather than simply measuring how well it fits the data it was trained on — it is a technique for honest performance estimation, and it also helps detect overfitting.\n\nOption a describes the opposite intention — evaluating on the training set itself gives an overly optimistic, biased estimate, which is exactly what cross-validation avoids. Options c and d describe improving speed or adding data, neither of which is the purpose of cross-validation; it is fundamentally an evaluation technique, not a way to improve or accelerate the model itself."
+  },
+  {
+    "id": 38,
+    "category": "Bayesian Classification",
+    "question": "Which of the following preprocessing activities is useful to build a Naive Bayes classifier if the independence hypothesis is violated?",
+    "options": [
+      { "id": "a", "text": "Normalization" },
+      { "id": "b", "text": "Discretization" },
+      { "id": "c", "text": "Feature selection" },
+      { "id": "d", "text": "Aggregation" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Naive Bayes assumes that attributes are conditionally independent given the class. When some attributes are highly correlated, this assumption is violated and the model can effectively 'double count' the evidence from those correlated attributes, skewing predictions. Feature selection removes redundant or highly correlated attributes, helping the remaining set of features better satisfy the independence assumption and improving classifier performance.\n\nNormalization (a) rescales numeric attributes but does nothing to address correlation between attributes. Discretization (b) changes continuous attributes into bins but likewise does not address independence violations. Aggregation (d) combines objects or attributes into coarser ones, which is unrelated to resolving statistical dependence between features."
+  },
+  {
+    "id": 39,
+    "category": "Data Preprocessing",
+    "question": "Which is the main reason for the Min-Max scaling (also known as 'rescaling') of attributes?",
+    "options": [
+      { "id": "a", "text": "Remove noise and outliers from numeric attributes" },
+      { "id": "b", "text": "Map all the numeric attributes to a new range with mean zero and variance one" },
+      { "id": "c", "text": "Convert continuous attributes into a small number of discrete bins" },
+      { "id": "d", "text": "Map all the numeric attributes to the same range, in order to prevent the attributes with higher range from having prevalent influence" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "Min-Max scaling rescales each numeric attribute to a fixed range, typically $[0,1]$, using $X_{scaled} = \\frac{X-X_{min}}{X_{max}-X_{min}}$. This preserves the shape of the original distribution while ensuring that attributes with naturally larger numeric ranges (e.g. salary in thousands vs. age in years) do not dominate distance-based or gradient-based computations simply because of their scale.\n\nOption a describes data cleaning, not scaling. Option b describes standardization (Z-score normalization), a different technique that centers data around a mean of 0 with variance 1, rather than bounding it to a fixed range. Option c describes discretization, which changes the granularity of values rather than their scale."
+  },
+  {
+    "id": 40,
+    "category": "Data Preprocessing",
+    "question": "Which is the main reason for the normalization (also known as 'rescaling') of numeric attributes, and what effect does it have in data preparation?",
+    "options": [
+      { "id": "a", "text": "Map all the numeric attributes to the same range, without altering the distribution, in order to avoid attributes with large ranges having more influence" },
+      { "id": "b", "text": "Map all the numeric attributes to a new range with mean zero and variance one" },
+      { "id": "c", "text": "Reduce the number of distinct values of an attribute" },
+      { "id": "d", "text": "Remove redundant or highly correlated attributes" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "Normalization (commonly implemented as Min-Max scaling) maps all numeric attributes into the same range (e.g. $[0,1]$) without altering the shape of their original distribution. This is done so that attributes with intrinsically larger numeric ranges do not disproportionately dominate calculations such as distance measures or gradient updates, simply as an artifact of their scale rather than their real importance.\n\nOption b describes standardization (Z-score normalization), a related but distinct technique that changes the distribution to have mean 0 and variance 1, rather than just bounding the range. Option c describes discretization, and option d describes feature selection — both are different preprocessing goals unrelated to rescaling attribute ranges."
+  },
+  {
+    "id": 41,
+    "category": "Feature Selection",
+    "question": "Which of the following is not an objective of feature selection?",
+    "options": [
+      { "id": "a", "text": "Improve prediction performance by removing irrelevant attributes" },
+      { "id": "b", "text": "Reduce the computational cost of training and inference" },
+      { "id": "c", "text": "Select the features with higher range, which have more influence on the computations" },
+      { "id": "d", "text": "Improve the interpretability of the resulting model" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Feature selection aims to improve prediction performance by discarding irrelevant or redundant attributes, reduce the computational cost of training and inference by working with fewer variables, and improve interpretability, since models with fewer variables are generally easier to understand. Selecting features simply because they have a 'higher range' is not a meaningful or valid objective — the numeric range of an attribute is an arbitrary artifact of its units and is typically addressed by scaling (normalization/standardization), not by feature selection.\n\nOptions a, b, and d are all genuine, well-established goals of feature selection, which is why they are incorrect answers to a question asking which is NOT an objective."
+  },
+  {
+    "id": 42,
+    "category": "Metric Distance Functions",
+    "question": "Which of the following pairings of data type with its best-suited distance/similarity function is correct?",
+    "options": [
+      { "id": "a", "text": "Vector space with real values → Manhattan Distance" },
+      { "id": "b", "text": "Boolean data → Cosine Distance" },
+      { "id": "c", "text": "Vectors of terms representing documents → Cosine Distance" },
+      { "id": "d", "text": "High-dimensional spaces → Euclidean Distance" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Cosine distance measures the angle between two vectors rather than their magnitude, which makes it well suited for document term vectors, where what matters is the relative proportion of terms (topic/direction) rather than the document's overall length.\n\nOption a is a mismatch: for a vector space with real values, the Euclidean distance is the standard and best-suited choice, not Manhattan (Manhattan is instead often preferred specifically in high-dimensional spaces, to mitigate the curse of dimensionality). Option b is a mismatch: for boolean/binary data, the Jaccard coefficient (which focuses on shared 1s) is the standard choice, not cosine distance. Option d is a mismatch: in high-dimensional spaces, Euclidean distance becomes less discriminative due to the curse of dimensionality, so Manhattan distance is generally preferred there instead."
+  },
+  {
+    "id": 43,
+    "category": "Model Evaluation",
+    "question": "When developing a classifier, which of the following is a symptom of overfitting?",
+    "options": [
+      { "id": "a", "text": "The error rate in the training set is much greater than the error rate in the test set" },
+      { "id": "b", "text": "The error rate in the test set is much greater than the error rate in the training set" },
+      { "id": "c", "text": "Both training and test error rates are equally low" },
+      { "id": "d", "text": "Both training and test error rates are equally high" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Overfitting occurs when a model learns the specific details and noise of the training data so closely that it fails to generalize to new data. The tell-tale symptom is a large gap between performance on the training set (very low error, since the model has essentially memorized it) and performance on the test set (much higher error, since the model doesn't generalize).\n\nOption a describes the opposite (and unusual) situation. Option c describes a well-fitted model with good generalization, the opposite of overfitting. Option d describes underfitting, where the model is too simple to capture the underlying pattern in either set."
+  },
+  {
+    "id": 44,
+    "category": "Decision Trees",
+    "question": "In a decision tree, an attribute which is used only in nodes near the leaves...",
+    "options": [
+      { "id": "a", "text": "...provides the most global information about the target" },
+      { "id": "b", "text": "...gives little insight with respect to the target" },
+      { "id": "c", "text": "...must always be the most important attribute in the tree" },
+      { "id": "d", "text": "...must always be a numeric attribute" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Attributes chosen near the root of a decision tree are selected because they provide the highest information gain (or lowest impurity) across the largest, most general subsets of data, giving them the most global predictive power. Attributes used only in splits near the leaves, in contrast, are applied to very small, specific subsets of data that have already been heavily filtered by earlier splits, so they distinguish between only a few remaining cases and therefore contribute comparatively little general insight about the target.\n\nOption a describes root-level attributes, the opposite of what's asked. Option c is false — being used near the leaves indicates the attribute is relatively less important, not more. Option d is false, since there is no requirement that leaf-level splitting attributes be numeric; they can be categorical or numeric regardless of tree depth."
+  },
+  {
+    "id": 45,
+    "category": "Clustering Methods",
+    "question": "Which of the statements below about Hierarchical Agglomerative Clustering is true?",
+    "options": [
+      { "id": "a", "text": "Requires the definition of distance between sets of objects" },
+      { "id": "b", "text": "Is based on a well-founded statistical model" },
+      { "id": "c", "text": "Requires the definition of inertia of clusters" },
+      { "id": "d", "text": "Is very efficient, also with large datasets" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "Hierarchical Agglomerative Clustering (HAC) is a bottom-up approach that starts with each object as its own cluster and repeatedly merges the two closest clusters. To decide which pair to merge at each step, it needs a way to measure distance between sets of objects (clusters), using linkage criteria such as single linkage (minimum distance), complete linkage (maximum distance), or average linkage.\n\nOption b is false — HAC is a geometric, distance-based procedure, not grounded in a formal statistical model (unlike, say, Expectation Maximization). Option c is false — 'inertia' (within-cluster sum of squares) is a concept associated with K-Means, not required by HAC. Option d is false — HAC is generally computationally expensive (often $O(n^2 \\log n)$ or worse) and scales poorly to large datasets compared to K-Means."
+  },
+  {
+    "id": 46,
+    "category": "Association Rules",
+    "question": "Given the rule evaluation formulas below, which pairing of formula with its name is correct?",
+    "options": [
+      { "id": "a", "text": "$\\frac{sup(A \\Rightarrow C)}{sup(C)}$ is the formula for Confidence" },
+      { "id": "b", "text": "$\\frac{sup(A \\Rightarrow C)}{sup(A)}$ is the formula for Confidence" },
+      { "id": "c", "text": "$sup(A \\cup C) - sup(A) \\cdot sup(C)$ is the formula for Conviction" },
+      { "id": "d", "text": "$\\frac{1-sup(C)}{1-sup(A \\Rightarrow C)}$ is the formula for Lift" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Confidence measures the probability of the consequent given the antecedent, and is computed as $\\frac{sup(A \\Rightarrow C)}{sup(A)}$ — the support of the rule divided by the support of just the antecedent, so option b is correct.\n\nOption a mismatches the confidence formula with dividing by $sup(C)$ instead of $sup(A)$; that ratio is actually related to Lift, not Confidence. Option c mismatches: $sup(A \\cup C) - sup(A)\\cdot sup(C)$ is the formula for Leverage (the difference between observed and expected co-occurrence under independence), not Conviction. Option d mismatches: $\\frac{1-sup(C)}{1-sup(A \\Rightarrow C)}$ is the formula for Conviction, not Lift — Lift is instead the ratio of observed to expected confidence under independence."
+  },
+  {
+    "id": 47,
+    "category": "Data Preprocessing",
+    "question": "In data preprocessing, which of the following is not an objective of the aggregation of attributes?",
+    "options": [
+      { "id": "a", "text": "Obtain a less detailed scale" },
+      { "id": "b", "text": "Reduce the variability of data" },
+      { "id": "c", "text": "Obtain a more detailed description of data" },
+      { "id": "d", "text": "Reduce the number of attributes or distinct values" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Aggregation combines two or more objects or attribute values into a single, coarser one (for example, summing daily sales into monthly sales). This inherently moves towards a less detailed, coarser-grained representation of the data — it reduces variability (via smoothing) and reduces the number of distinct attributes or values, but it does so at the cost of detail, not in service of it.\n\nOptions a, b, and d are all genuine effects/objectives of aggregation, so obtaining a MORE detailed description (option c) is the exact opposite of what aggregation achieves, making it the correct answer to what is NOT an objective."
+  },
+  {
+    "id": 48,
+    "category": "Data Preprocessing",
+    "question": "In data preprocessing, which of the following is an objective of the aggregation of attributes? (Select all that apply)",
+    "options": [
+      { "id": "a", "text": "Obtain a less detailed scale" },
+      { "id": "b", "text": "Reduce the variability of data" },
+      { "id": "c", "text": "Reduce the number of attributes or distinct values" },
+      { "id": "d", "text": "Obtain a more detailed description of data" }
+    ],
+    "correct": ["a", "b", "c"],
+    "multiple": true,
+    "explanation": "Aggregation combines multiple objects or values into a single, coarser one (e.g. daily sales aggregated into monthly sales). This naturally results in a less detailed scale (a), since fine-grained records are merged into broader categories; it reduces the variability of the data through smoothing effects, since averaging or summing tends to cancel out random fluctuations (b); and it reduces the number of distinct attributes or values that need to be processed (c), which lowers memory and computational requirements.\n\nObtaining a more detailed description of the data (d) is false and is actually the opposite of what aggregation does — aggregation sacrifices detail in exchange for a more compact, coarser representation."
+  },
+  {
+    "id": 49,
+    "category": "Association Rules",
+    "question": "Which of the statements below best describes the strategy of Apriori in finding the frequent itemsets?",
+    "options": [
+      { "id": "a", "text": "Evaluation of the support of the itemsets in an order such that uninteresting parts of the search space are considered only at the end of the execution" },
+      { "id": "b", "text": "Evaluation of the confidence of the itemsets in an order such that uninteresting parts of the search space are pruned as soon as possible" },
+      { "id": "c", "text": "Evaluation of the support of the itemsets in an order such that uninteresting parts of the search space are pruned as soon as possible" },
+      { "id": "d", "text": "Evaluation of the support of the itemsets in an order such that the interesting parts of the search space are pruned as soon as possible" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Apriori exploits the anti-monotone property of support: it evaluates itemsets in increasing order of size (starting from single items), computing their support at each step, and as soon as an itemset is found to be infrequent, all of its supersets are pruned from further consideration without evaluating them. This is exactly the strategy of pruning uninteresting (infrequent) parts of the search space as early as possible, based on support.\n\nOption a is wrong because uninteresting parts are pruned immediately, not merely deferred to the end. Option b incorrectly attributes the pruning to confidence rather than support — confidence is used later, to generate rules from the already-discovered frequent itemsets, not to prune the itemset search itself. Option d is the opposite of correct: Apriori prunes the uninteresting (infrequent) parts, not the interesting ones."
+  },
+  {
+    "id": 50,
+    "category": "Dimensionality Reduction",
+    "question": "In order to reduce the dimensionality of a dataset, which is the advantage of Multi Dimensional Scaling (MDS) with respect to Principal Component Analysis (PCA)?",
+    "options": [
+      { "id": "a", "text": "MDS can be used also with categorical data, provided that the matrix of the distances is available, while PCA is limited to vector spaces" },
+      { "id": "b", "text": "MDS requires less computational power" },
+      { "id": "c", "text": "MDS can be used with categorical data only after a transformation into a vector space" },
+      { "id": "d", "text": "MDS can work on any kind of data, while PCA is limited to categorical data" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "MDS builds a low-dimensional map of objects using only a table of pairwise distances between them, without requiring the objects to live in an explicit numeric vector space. This means it can be applied to categorical or otherwise non-vectorial data, as long as a meaningful distance matrix can be defined. PCA, in contrast, is a linear transformation that strictly requires numeric attributes in a vector space, since it operates on the covariance matrix of the data.\n\nOption b is not the key advantage highlighted for MDS — in fact MDS can be more computationally demanding, not less. Option c contradicts the actual advantage, since MDS's benefit is precisely that it does NOT require transforming categorical data into a vector space first. Option d is factually wrong in both directions — PCA is not 'limited to categorical data'; it is limited to numeric vector spaces."
+  },
+  {
+    "id": 51,
+    "category": "Machine Learning Paradigms",
+    "question": "Which of the following methods is different from the others?",
+    "options": [
+      { "id": "a", "text": "Decision Tree" },
+      { "id": "b", "text": "K-means" },
+      { "id": "c", "text": "Expectation Maximisation" },
+      { "id": "d", "text": "Apriori" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "K-means, Expectation Maximization, and Apriori are all unsupervised methods: K-means and EM perform clustering without needing labeled data, and Apriori discovers association rules purely from the co-occurrence patterns of items in transactions, again with no labels involved. The Decision Tree, on the other hand, is a supervised learning method — it is trained using labeled examples (a known target/class for each training instance) in order to predict that target for new data.\n\nThis is why Decision Tree is the odd one out: it is the only method among the four that requires labeled training data, while the other three all operate on unlabeled data."
+  },
+  {
+    "id": 52,
+    "category": "Machine Learning Paradigms",
+    "question": "Which of the following methods is different from the others?",
+    "options": [
+      { "id": "a", "text": "K-means" },
+      { "id": "b", "text": "Expectation Maximization" },
+      { "id": "c", "text": "DBSCAN" },
+      { "id": "d", "text": "Decision Tree" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "K-Means, Expectation Maximization, and DBSCAN are all clustering methods: they group similar data points together based on distance or density (K-Means, DBSCAN) or based on a probabilistic mixture model (EM), without requiring any class labels. The Decision Tree, in contrast, is a supervised classification/regression model, built from labeled training examples to predict a target variable.\n\nThis makes Decision Tree the odd one out: it does not perform clustering at all, and unlike the other three, it fundamentally requires labeled data to be trained."
+  },
+  {
+    "id": 53,
+    "category": "Machine Learning Paradigms",
+    "question": "Which of the following methods is different from the others?",
+    "options": [
+      { "id": "a", "text": "SVM" },
+      { "id": "b", "text": "Neural Network" },
+      { "id": "c", "text": "Decision Tree" },
+      { "id": "d", "text": "DBSCAN" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "SVM, Neural Networks, and Decision Trees are all supervised classification (or regression) methods — they are trained using labeled examples to learn a mapping from input features to a target class or value. DBSCAN, on the other hand, is an unsupervised, density-based clustering algorithm: it groups points based purely on their spatial density, without ever using or requiring class labels.\n\nThis makes DBSCAN the odd one out: it is the only method among the four that is not a classification method, and the only one that does not rely on labeled training data."
+  },
+  {
+    "id": 54,
+    "category": "Clustering Evaluation",
+    "question": "Which of the following methods is different from the others?",
+    "options": [
+      { "id": "a", "text": "Misclassification Error" },
+      { "id": "b", "text": "Gini Index" },
+      { "id": "c", "text": "Entropy" },
+      { "id": "d", "text": "Silhouette Index" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "Misclassification Error, Gini Index, and Entropy are all impurity measures used to evaluate the purity of class labels in a supervised setting, most commonly as splitting criteria for decision trees — they all require known class labels to compute. The Silhouette Index, in contrast, is an unsupervised clustering-quality measure: it evaluates how well-separated and cohesive the clusters of an unsupervised clustering result are, without ever referring to true class labels.\n\nThis makes the Silhouette Index the odd one out: it is the only measure among the four that evaluates clustering structure rather than classification purity, and the only one that does not require labeled data."
+  },
+  {
+    "id": 55,
+    "category": "Association Rules",
+    "question": "How does pruning work when generating frequent itemsets?",
+    "options": [
+      { "id": "a", "text": "If an itemset is frequent, then none of its subsets can be frequent" },
+      { "id": "b", "text": "If an itemset is not frequent, then none of its supersets can be frequent, therefore the frequencies of the supersets are not evaluated" },
+      { "id": "c", "text": "If an itemset is frequent, all of its supersets must be infrequent" },
+      { "id": "d", "text": "Pruning removes the least frequent item from every transaction before mining begins" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "This is the Apriori principle in its contrapositive form: 'if an itemset is frequent, all of its subsets must also be frequent,' which is logically equivalent to saying that if an itemset is infrequent, then none of its supersets can be frequent either. Because of this, once an itemset is found to fall below the minimum support threshold, the algorithm can safely skip evaluating any of its supersets, since they are all guaranteed to be infrequent too — this drastically shrinks the search space.\n\nOption a states essentially the reverse (and incorrect) implication — the true Apriori principle guarantees that a frequent itemset's subsets ARE frequent, not that they cannot be. Option c is also the reverse of the truth: a frequent itemset says nothing that forces its supersets to be infrequent (they might be frequent or not). Option d describes a data-cleaning-like transaction modification, which is not how Apriori-style pruning actually works — pruning happens in the search over candidate itemsets, not by editing the transactions."
+  },
+  {
+    "id": 56,
+    "category": "Clustering Methods",
+    "question": "What measure is maximized by the Expectation Maximization (EM) algorithm for clustering?",
+    "options": [
+      { "id": "a", "text": "The distortion (sum of squared distances of points to centroids)" },
+      { "id": "b", "text": "The likelihood of the observed data (and class assignments) given the model's parameters" },
+      { "id": "c", "text": "The silhouette coefficient of the clustering" },
+      { "id": "d", "text": "The support of the most frequent itemset" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "EM alternates between an E-step, which computes the expected value of the class/cluster assignments given the current model parameters, and an M-step, which updates the parameters (e.g. of a Gaussian Mixture Model) to maximize the likelihood of the observed data under those assignments. Iterating these two steps drives the algorithm towards parameters that (locally) maximize the likelihood of the data, probabilistically assigning points to clusters rather than making hard assignments.\n\nDistortion/SSE (a) is the objective minimized by K-Means, not EM. The silhouette coefficient (c) is a post-hoc clustering evaluation metric, not an internal optimization objective of any specific clustering algorithm. Support of an itemset (d) belongs to association rule mining, an entirely different data mining task."
+  },
+  {
+    "id": 57,
+    "category": "Decision Trees",
+    "question": "The information gain is used to...",
+    "options": [
+      { "id": "a", "text": "Select the attribute that minimizes the depth of the resulting tree" },
+      { "id": "b", "text": "Select the attribute which maximizes, for a given training set, the ability to predict the class value" },
+      { "id": "c", "text": "Select the attribute with the highest correlation to the other attributes" },
+      { "id": "d", "text": "Select the attribute with the largest number of distinct values" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Information Gain measures the reduction in entropy (uncertainty about the class label) achieved by splitting the training set on a given attribute: $Gain(S,A) = Entropy(S) - \\sum \\frac{|S_v|}{|S|}Entropy(S_v)$. The attribute chosen at each node is the one that maximizes this gain, i.e. the one that most improves the ability to predict the class value on the given training set.\n\nOption a is a plausible-sounding but incorrect goal — minimizing tree depth is not what information gain directly optimizes (a greedy, high-gain split does not guarantee a shallow tree). Option c is unrelated; correlation between attributes is not the criterion used. Option d is a well-known pitfall of plain information gain (it is biased towards attributes with many distinct values), but it is not what information gain is intended or defined to select for — this bias is actually corrected by the Gain Ratio."
+  },
+  {
+    "id": 58,
+    "category": "Clustering Methods",
+    "question": "Which of the following clustering methods is not based on distances between objects?",
+    "options": [
+      { "id": "a", "text": "K-Means" },
+      { "id": "b", "text": "Hierarchical clustering" },
+      { "id": "c", "text": "DBSCAN" },
+      { "id": "d", "text": "Expectation Maximization" }
+    ],
+    "correct": ["d"],
+    "multiple": false,
+    "explanation": "Expectation Maximization (EM) is based on fitting a statistical mixture model (typically Gaussian) to the data by estimating probability distributions and maximizing the likelihood of the observed data, assigning points to clusters probabilistically based on likelihood rather than a geometric distance measure.\n\nK-Means (a) explicitly relies on (typically Euclidean) distances from points to centroids to assign clusters and update centers. Hierarchical clustering (b) relies on distance measures between sets of objects (e.g. single, complete, or average linkage) to decide which clusters to merge. DBSCAN (c) relies on a distance-based neighborhood radius (epsilon) to determine density and connectivity. All three of these (a, b, c) are explicitly geometric/distance-based, unlike EM."
+  },
+  {
+    "id": 59,
+    "category": "Feature Selection",
+    "question": "In a dataset with D attributes, how many subsets of attributes should be considered for feature selection according to an exhaustive search?",
+    "options": [
+      { "id": "a", "text": "$O(D^2)$" },
+      { "id": "b", "text": "$O(2^D)$" },
+      { "id": "c", "text": "$O(D!)$" },
+      { "id": "d", "text": "$O(D\\log D)$" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "An exhaustive search for feature selection must consider every possible subset of the D available attributes — that is, the entire power set of the attribute set. Since a set of D elements has $2^D$ subsets (each attribute can either be included or excluded), the number of subsets to evaluate grows as $O(2^D)$, which quickly becomes computationally infeasible as D grows (this problem is NP-hard).\n\n$O(D^2)$ (a) and $O(D\\log D)$ (d) both grow far too slowly to represent the full power set. $O(D!)$ (c) describes the number of orderings (permutations) of D items, not the number of subsets, and it actually grows even faster than $2^D$ but is not the relevant quantity here — subsets, not orderings, are what an exhaustive feature search must enumerate."
+  },
+  {
+    "id": 60,
+    "category": "Dimensionality Reduction",
+    "question": "Which is the effect of the curse of dimensionality?",
+    "options": [
+      { "id": "a", "text": "When the number of dimensions increases, the Euclidean distance becomes less effective to discriminate between points in the space" },
+      { "id": "b", "text": "Computing the Euclidean distance becomes mathematically impossible above 3 dimensions" },
+      { "id": "c", "text": "The Manhattan distance converges to zero as dimensions increase" },
+      { "id": "d", "text": "Clustering algorithms always produce more clusters as dimensionality increases" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "As the number of dimensions grows, data points become increasingly sparse in the space, and — counterintuitively — the ratio between the distance to the nearest and to the farthest point tends to converge towards 1. This means the notion of 'closeness' loses its discriminative power: the Euclidean distance (and distance-based algorithms like K-Means or KNN in general) becomes much less effective at telling points apart, because everything ends up looking roughly equally far from everything else.\n\nOption b is mathematically false — the Euclidean distance formula $d(p,q)=\\sqrt{\\sum(p_i-q_i)^2}$ is perfectly well-defined in any number of dimensions; it just becomes less useful, not impossible to compute. Option c is false — the Manhattan distance does not converge to zero; in fact distances of all kinds tend to grow (in absolute terms) with more dimensions, it's their discriminative ratio that degrades. Option d is not a real, general consequence of the curse of dimensionality; the number of clusters found depends on the algorithm and data, not automatically on dimensionality."
+  },
+  {
+    "id": 61,
+    "category": "Bayesian Classification",
+    "question": "Which is the main purpose of smoothing in Bayesian classification?",
+    "options": [
+      { "id": "a", "text": "To reduce the number of attributes considered by the classifier" },
+      { "id": "b", "text": "To allow classifying an object containing attribute values which are missing from some classes in the training set" },
+      { "id": "c", "text": "To speed up the training of the Naive Bayes model" },
+      { "id": "d", "text": "To normalize continuous attributes before computing probabilities" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Laplace (additive) smoothing adds a small count to every probability estimate: $P(x_i|C) = \\frac{count(x_i,C)+1}{count(C)+|V|}$. Without smoothing, if a particular attribute value never appeared for a given class in the training set, its estimated probability would be exactly zero, which would zero out the entire product of probabilities used by Naive Bayes and make it impossible to classify any object containing that value for that class. Smoothing prevents this by ensuring no probability estimate is ever exactly zero, allowing the classifier to still make a prediction.\n\nOption a is unrelated — smoothing does not reduce the number of attributes used. Option c is not the purpose; smoothing does not meaningfully speed up training, it changes probability estimates. Option d describes numeric attribute rescaling, a separate preprocessing concern, not what smoothing addresses."
+  },
+  {
+    "id": 62,
+    "category": "Clustering Methods",
+    "question": "Which of the following characteristics of data can reduce the effectiveness of DBSCAN?",
+    "options": [
+      { "id": "a", "text": "Presence of outliers" },
+      { "id": "b", "text": "Presence of clusters with different densities" },
+      { "id": "c", "text": "Presence of categorical attributes" },
+      { "id": "d", "text": "A high number of dimensions only" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "DBSCAN relies on two global parameters, epsilon (neighborhood radius) and minPts, applied uniformly across the whole dataset. When clusters have substantially different densities, a single choice of epsilon cannot work well for all of them: an epsilon small enough to correctly separate dense clusters may leave sparse clusters entirely classified as noise, while an epsilon large enough to capture the sparse clusters may cause distinct dense clusters to be incorrectly merged together.\n\nPresence of outliers (a) is actually something DBSCAN handles well, since it explicitly labels sparse points as noise rather than forcing them into a cluster — this is one of its strengths, not a weakness. Categorical attributes (c) are a data representation issue affecting the choice of distance function generally, not a specific weakness unique to DBSCAN. A high number of dimensions alone (d) affects distance-based methods broadly (via the curse of dimensionality) but is not the specific characteristic being tested here — varying density is the classic, well-known DBSCAN weakness."
+  },
+  {
+    "id": 63,
+    "category": "Metric Distance Functions",
+    "question": "Which of the following types of data allows the direct use of the Euclidean distance?",
+    "options": [
+      { "id": "a", "text": "Categorical attributes without any transformation" },
+      { "id": "b", "text": "Transactional (basket) data" },
+      { "id": "c", "text": "A point in a vector space" },
+      { "id": "d", "text": "Sequences of unequal length" }
+    ],
+    "correct": ["c"],
+    "multiple": false,
+    "explanation": "Euclidean distance is defined for continuous numeric variables represented as points in a vector space, computed as $d(p,q) = \\sqrt{\\sum (p_i-q_i)^2}$ — a straightforward straight-line distance that requires each object to be represented by a fixed set of comparable numeric coordinates.\n\nCategorical attributes (a) cannot be directly plugged into this formula without first transforming them into a numeric representation (e.g. one-hot encoding), since there is no meaningful notion of numeric 'distance' between raw categories. Transactional/basket data (b) is typically compared using set-based measures like the Jaccard coefficient, not Euclidean distance. Sequences of unequal length (d) generally require specialized alignment-based distances (e.g. edit distance, dynamic time warping), since the standard Euclidean formula requires vectors of the same fixed dimensionality."
+  },
+  {
+    "id": 64,
+    "category": "Neural Networks",
+    "question": "What are the hyperparameters of a Neural Network (possibly non exhaustive)?",
+    "options": [
+      { "id": "a", "text": "The weights and biases learned during training" },
+      { "id": "b", "text": "Hidden layer structure, learning rate, activation function, number of epochs" },
+      { "id": "c", "text": "The training and test set sizes only" },
+      { "id": "d", "text": "The loss value obtained at convergence" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Hyperparameters are settings chosen before training begins, which govern how the network is structured and how it learns — examples include the hidden layer structure (number of layers and neurons), the learning rate, the choice of activation function, and the number of training epochs. These are set by the practitioner (often via tuning/validation) rather than learned directly from the data during training.\n\nOption a describes the model's parameters (weights and biases), which are what get learned during training itself, not hyperparameters. Option c describes a dataset split choice, which is a broader experimental design decision, not specifically a neural network hyperparameter. Option d describes an outcome/result of training (the final loss), not a setting configured beforehand."
+  },
+  {
+    "id": 65,
+    "category": "Model Evaluation",
+    "question": "How can we measure the quality of a trained regression model?",
+    "options": [
+      { "id": "a", "text": "With a formula elaborating the difference between the forecast values and the true ones" },
+      { "id": "b", "text": "By counting the proportion of instances placed in the correct class" },
+      { "id": "c", "text": "By counting the number of coefficients used in the model" },
+      { "id": "d", "text": "By measuring the depth of the decision tree used to generate predictions" }
+    ],
+    "correct": ["a"],
+    "multiple": false,
+    "explanation": "Since a regression model predicts continuous numeric values, its quality is naturally assessed by quantifying how far its predictions deviate from the true values, using metrics such as Mean Absolute Error ($MAE = \\frac{1}{n}\\sum |y_i-\\hat{y}_i|$), Mean Squared Error ($MSE = \\frac{1}{n}\\sum (y_i-\\hat{y}_i)^2$), or Root Mean Squared Error ($RMSE = \\sqrt{\\frac{1}{n}\\sum (y_i-\\hat{y}_i)^2}$) — all of which are formulas built around the difference between predicted and actual values.\n\nOption b describes classification accuracy, a metric appropriate for categorical targets, not numeric regression targets. Option c describes model complexity (number of parameters), which relates to overfitting risk but does not directly measure predictive quality. Option d is specific to tree-based models and unrelated to measuring regression prediction error in general."
+  },
+  {
+    "id": 66,
+    "category": "Classification vs Regression",
+    "question": "What is the difference between classification and regression?",
+    "options": [
+      { "id": "a", "text": "Classification has a numeric target, while regression has a categorical target" },
+      { "id": "b", "text": "Classification has a categorical target, while regression has a numeric target" },
+      { "id": "c", "text": "Classification uses distance functions, while regression never does" },
+      { "id": "d", "text": "There is no fundamental difference between them" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Classification predicts a discrete class label (e.g. spam/not spam, cat/dog), where the target variable takes on a finite set of categorical values. Regression predicts a continuous quantitative value (e.g. house price, temperature), where the target is numeric and can, in principle, take on infinitely many values along a continuous scale. This distinction in the nature of the target variable is the fundamental difference between the two supervised learning tasks.\n\nOption a states the reverse of the correct distinction. Option c is false — many classification methods use distance functions (e.g. KNN), but so can some regression methods; distance-function usage does not distinguish the two tasks. Option d is false, since the difference in the type of target variable (categorical vs. numeric) is a genuine and fundamental distinction with real implications for model choice and evaluation metrics."
+  },
+  {
+    "id": 67,
+    "category": "Dimensionality Reduction",
+    "question": "In feature selection/extraction, what is Principal Component Analysis (PCA)?",
+    "options": [
+      { "id": "a", "text": "A technique that selects a subset of the original attributes with the highest individual variance" },
+      { "id": "b", "text": "A mathematical technique used to transform a set of numeric attributes into a smaller set of numeric attributes which capture most of the variability in data" },
+      { "id": "c", "text": "A clustering algorithm based on principal distances between objects" },
+      { "id": "d", "text": "A technique to convert categorical attributes into numeric ones" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "PCA is a dimensionality reduction technique that projects the original numeric attributes onto a new set of orthogonal axes, called principal components, which are the eigenvectors of the data's covariance matrix. The first principal component captures the maximum possible variance in the data, the second captures the maximum remaining variance orthogonal to the first, and so on — allowing a smaller number of new attributes to capture most of the original variability. It is an unsupervised linear transformation, not a selection of existing attributes.\n\nOption a describes a feature selection approach (choosing existing attributes), which is different from PCA's approach of creating new transformed attributes. Option c incorrectly describes PCA as a clustering algorithm, which it is not. Option d describes encoding categorical variables, an unrelated preprocessing step."
+  },
+  {
+    "id": 68,
+    "category": "Neural Networks",
+    "question": "In a Neural Network, what is backpropagation?",
+    "options": [
+      { "id": "a", "text": "The technique used to initialize the connection weights of a neural network before training" },
+      { "id": "b", "text": "The technique used to adjust the connection weights according to the difference between the desired output and the output generated by the network" },
+      { "id": "c", "text": "The technique used to select the optimal number of hidden layers" },
+      { "id": "d", "text": "The technique used to normalize the inputs of a neural network" }
+    ],
+    "correct": ["b"],
+    "multiple": false,
+    "explanation": "Backpropagation computes the gradient of the loss function with respect to each connection weight in the network, using the chain rule to propagate error gradients backward from the output layer to the input layer. These gradients are then used to update the weights, using a rule such as $w_{new} = w_{old} - \\eta \\cdot \\frac{\\partial L}{\\partial w}$ (where $\\eta$ is the learning rate), so that the network's output moves closer to the desired target on subsequent passes. For example, with a single-layer network with inputs $x_1=1, x_2=0$, weights $w_1=0.5, w_2=0.3$, bias $b=0.1$, and sigmoid activation, the forward pass gives $z = 0.5\\cdot1+0.3\\cdot0+0.1 = 0.6$ and $\\hat{y}=\\sigma(0.6)\\approx 0.645$; comparing this to a target $y=1$ gives a loss whose gradient is then propagated backward to correct the weights.\n\nOption a describes weight initialization, a separate step that happens before training/backpropagation begins. Option c describes a network architecture design/hyperparameter choice, not something backpropagation does. Option d describes input preprocessing (e.g. standardization), unrelated to the weight-adjustment process of backpropagation."
+  }
+]
