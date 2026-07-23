@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, watch } from 'vue'
+import { computed, defineAsyncComponent, onMounted, ref, watch } from 'vue'
 import Button from 'primevue/button'
 import Tabs from 'primevue/tabs'
 import TabList from 'primevue/tablist'
@@ -10,7 +10,10 @@ import QuestionList from './components/QuestionList.vue'
 import { useQuizState } from './composables/useQuizState.js'
 import questionsData from './data/questions.json'
 
+const ProgressSyncDialog = defineAsyncComponent(() => import('./components/ProgressSyncDialog.vue'))
+
 const { state, toggleTheme, resetAllAnswers } = useQuizState()
+const syncOpen = ref(false)
 
 const questions = questionsData
 
@@ -57,6 +60,14 @@ function onResetProgress() {
 
         <div class="app-header-actions">
           <Button
+            icon="pi pi-sync"
+            rounded
+            text
+            severity="secondary"
+            v-tooltip.bottom="'Sync progress between devices'"
+            @click="syncOpen = true"
+          />
+          <Button
             :icon="state.theme === 'dark' ? 'pi pi-sun' : 'pi pi-moon'"
             rounded
             text
@@ -85,6 +96,14 @@ function onResetProgress() {
           <span class="stat-label">Marked</span>
         </div>
         <Button
+          label="Sync"
+          icon="pi pi-sync"
+          text
+          size="small"
+          severity="secondary"
+          @click="syncOpen = true"
+        />
+        <Button
           label="Reset progress"
           icon="pi pi-refresh"
           text
@@ -95,6 +114,8 @@ function onResetProgress() {
         />
       </div>
     </header>
+
+    <ProgressSyncDialog v-model:visible="syncOpen" />
 
     <main class="app-main">
       <Tabs value="all">
@@ -129,7 +150,7 @@ function onResetProgress() {
     </main>
 
     <footer class="app-footer">
-      <p>Built for exam practice · progress is saved locally in your browser</p>
+      <p>Built for exam practice · progress is saved locally · use Sync to transfer between devices</p>
     </footer>
   </div>
 </template>

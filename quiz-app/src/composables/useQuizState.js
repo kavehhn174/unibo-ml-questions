@@ -106,6 +106,32 @@ function resetAllAnswers() {
   Object.keys(state.answered).forEach((k) => delete state.answered[k])
 }
 
+function clearMap(obj) {
+  Object.keys(obj).forEach((k) => delete obj[k])
+}
+
+/**
+ * Replace local progress maps from a decoded sync payload.
+ * Theme is applied when present.
+ */
+function applyProgress(payload) {
+  clearMap(state.selections)
+  clearMap(state.revealed)
+  clearMap(state.answered)
+  clearMap(state.marked)
+  clearMap(state.ratings)
+
+  Object.assign(state.selections, payload.selections ?? {})
+  Object.assign(state.revealed, payload.revealed ?? {})
+  Object.assign(state.answered, payload.answered ?? {})
+  Object.assign(state.marked, payload.marked ?? {})
+  Object.assign(state.ratings, payload.ratings ?? {})
+
+  if (payload.theme === 'dark' || payload.theme === 'light') {
+    state.theme = payload.theme
+  }
+}
+
 export function useQuizState() {
   return {
     state,
@@ -119,6 +145,7 @@ export function useQuizState() {
     isOptionSelected,
     isCorrect,
     toggleTheme,
-    resetAllAnswers
+    resetAllAnswers,
+    applyProgress
   }
 }
